@@ -1,0 +1,26 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "$FOAM_CASE/0/";
+    object      values;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Tini              300; // Kelvin, room temp.
+Tref              293; // Kelvin, refriferation temp.
+pressure          101325; // Pascals, atmospheric pressure
+Text              292.45; // Kelvin, external temp. for convection with the room on Gamma_up boundary
+h                  28;
+kcte              5.475000e-01;
+gradroom          $h/$kcte;//($Text-T);
+pini              $pressure;
+
+// ************************************************************************* //

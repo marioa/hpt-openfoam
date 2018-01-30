@@ -1,0 +1,64 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1706                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     0.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/cap/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+4
+(
+    wedge0
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1232;
+        startFace       1805;
+    }
+
+    wedge1
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1232;
+        startFace       3037;
+    }
+
+    cap_to_food
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          23;
+        startFace       4269;
+        sampleMode      nearestPatchFace;
+        sampleRegion    food;
+        samplePatch     food_to_cap;
+        physicalType    mappedPatchBase;
+    }
+
+    cap_to_fluid
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          43;
+        startFace       4292;
+        sampleMode      nearestPatchFace;
+        sampleRegion    fluid;
+        samplePatch     fluid_to_cap;
+        physicalType    mappedPatchBase;
+    }
+
+)
+
+
+// ************************************************************************* //

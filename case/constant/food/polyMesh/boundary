@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1706                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     0.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/food/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+5
+(
+    wedge0
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          5388;
+        startFace       7969;
+    }
+
+    wedge1
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          5388;
+        startFace       13357;
+    }
+
+    food_to_cap
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          23;
+        startFace       18745;
+        sampleMode      nearestPatchFace;
+        sampleRegion    cap;
+        samplePatch     cap_to_food;
+        physicalType    mappedPatchBase;
+    }
+
+    food_to_fluid
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          90;
+        startFace       18768;
+        sampleMode      nearestPatchFace;
+        sampleRegion    fluid;
+        samplePatch     fluid_to_food;
+        physicalType    mappedPatchBase;
+    }
+
+    food_to_steel
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          23;
+        startFace       18858;
+        sampleMode      nearestPatchFace;
+        sampleRegion    steel;
+        samplePatch     steel_to_food;
+        physicalType    mappedPatchBase;
+    }
+
+)
+
+
+// ************************************************************************* //

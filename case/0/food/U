@@ -1,0 +1,53 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1706                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0/food";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+    wedge0
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    wedge1
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    food_to_cap
+    {
+        type            calculated;
+        value           uniform (0 0 0);
+    }
+    food_to_fluid
+    {
+        type            calculated;
+        value           uniform (0 0 0);
+    }
+    food_to_steel
+    {
+        type            calculated;
+        value           uniform (0 0 0);
+    }
+}
+
+
+// ************************************************************************* //

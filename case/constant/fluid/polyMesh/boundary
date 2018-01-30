@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1706                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     0.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/fluid/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+5
+(
+    wedge0
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1352;
+        startFace       1893;
+    }
+
+    wedge1
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1352;
+        startFace       3245;
+    }
+
+    fluid_to_steel
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          123;
+        startFace       4597;
+        sampleMode      nearestPatchFace;
+        sampleRegion    steel;
+        samplePatch     steel_to_fluid;
+        physicalType    mappedPatchBase;
+    }
+
+    fluid_to_food
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          90;
+        startFace       4720;
+        sampleMode      nearestPatchFace;
+        sampleRegion    food;
+        samplePatch     food_to_fluid;
+        physicalType    mappedPatchBase;
+    }
+
+    fluid_to_cap
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          43;
+        startFace       4810;
+        sampleMode      nearestPatchFace;
+        sampleRegion    cap;
+        samplePatch     cap_to_fluid;
+        physicalType    mappedPatchBase;
+    }
+
+)
+
+
+// ************************************************************************* //

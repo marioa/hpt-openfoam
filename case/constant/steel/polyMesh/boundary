@@ -1,0 +1,88 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1706                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     0.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/steel/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+7
+(
+    wedge0
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1723;
+        startFace       2475;
+    }
+
+    wall
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          19;
+        startFace       4198;
+    }
+
+    up
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          2;
+        startFace       4217;
+    }
+
+    wedge1
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          1723;
+        startFace       4219;
+    }
+
+    ref
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          25;
+        startFace       5942;
+    }
+
+    steel_to_fluid
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          123;
+        startFace       5967;
+        sampleMode      nearestPatchFace;
+        sampleRegion    fluid;
+        samplePatch     fluid_to_steel;
+        physicalType    mappedPatchBase;
+    }
+
+    steel_to_food
+    {
+        type            mappedPatchBase;
+        inGroups        1 ( wall );
+        nFaces          23;
+        startFace       6090;
+        sampleMode      nearestPatchFace;
+        sampleRegion    food;
+        samplePatch     food_to_steel;
+        physicalType    mappedPatchBase;
+    }
+
+)
+
+
+// ************************************************************************* //

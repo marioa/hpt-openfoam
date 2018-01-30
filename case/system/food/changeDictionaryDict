@@ -1,0 +1,81 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//# include "$FOAM_CASE/0/inputs"
+
+boundary
+{
+    "wedge.*"
+    {
+        type            wedge;
+    	  physicalType	  wedge;
+    }
+    wall
+    {
+        type            wall;
+	      physicalType	  wall;
+    }
+    /*up
+    {
+        type            externalWallHeatFluxTemperature;
+	    physicalType	externalWallHeatFluxTemperature;
+    }*/
+    "food_to_.*"
+    {
+        type           mappedPatchBase;//mappedWall;
+        physicalType   mappedPatchBase;//mappedWall;
+    }
+}
+T
+{
+    internalField   uniform 200;
+
+    boundaryField
+    {
+        "food_to_.*"
+            {
+                type            compressible::turbulentTemperatureCoupledBaffleMixed;
+                Tnbr            T;
+                kappaMethod     solidThermo;
+                //kappaName       none;//kappa;
+                //thicknessLayers ();
+                //kappaLayers     ();
+                value           uniform 200;
+            }
+       "wedge.*"
+            {
+                type            wedge;
+          	    physicalType	  wedge;
+            }
+    }
+}
+
+p
+{
+    internalField   uniform 1e5;
+  
+    boundaryField
+    {
+        "wedge.*"
+        {
+            type            wedge;
+    	      physicalType	  wedge;
+        }
+
+    }
+}
+
+// ************************************************************************* //
