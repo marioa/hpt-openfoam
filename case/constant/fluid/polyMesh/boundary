@@ -36,38 +36,35 @@ FoamFile
 
     fluid_to_steel
     {
-        type            mappedPatchBase;
+        type            mappedWall;
         inGroups        1 ( wall );
         nFaces          123;
         startFace       4597;
         sampleMode      nearestPatchFace;
         sampleRegion    steel;
         samplePatch     steel_to_fluid;
-        physicalType    mappedPatchBase;
     }
 
     fluid_to_food
     {
-        type            mappedPatchBase;
+        type            mappedWall;
         inGroups        1 ( wall );
         nFaces          90;
         startFace       4720;
         sampleMode      nearestPatchFace;
         sampleRegion    food;
         samplePatch     food_to_fluid;
-        physicalType    mappedPatchBase;
     }
 
     fluid_to_cap
     {
-        type            mappedPatchBase;
+        type            mappedWall;
         inGroups        1 ( wall );
         nFaces          43;
         startFace       4810;
         sampleMode      nearestPatchFace;
         sampleRegion    cap;
         samplePatch     cap_to_fluid;
-        physicalType    mappedPatchBase;
     }
 
 )

@@ -15,14 +15,29 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#include "$FOAM_CASE/0/inputs"
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   uniform 300;
+
+boundaryField
+{
+    ".*"
+    {
+        type            calculated;
+        value           uniform 300;
+    }
+}
+
+// ************************************************************************* //
+
+/*#include "$FOAM_CASE/0/inputs"
 
 dimensions      [0 0 0 1 0 0 0];
 
 internalField   uniform $Tini;
 
 boundaryField
-{
+{*/
 /*    up
     { 
                 type            externalWallHeatFluxTemperature; 
@@ -73,7 +88,7 @@ boundaryField
         type            zeroGradient;
     }*/
 
-        ".*"
+    /*    ".*"
         {
         type            zeroGradient;//calculated;//zeroGradient;
         //value           uniform $Tini;
@@ -81,8 +96,8 @@ boundaryField
         cap_to_food
         {
         type          mappedPatchBase;
-        }
-}
-
+        }*/
+/*}
+*/
 
 // ************************************************************************* //
