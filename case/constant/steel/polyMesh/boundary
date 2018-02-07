@@ -26,7 +26,7 @@ FoamFile
         startFace       2475;
     }
 
-    wall
+    steelwalls
     {
         type            patch;
         physicalType    patch;
@@ -60,26 +60,24 @@ FoamFile
 
     steel_to_fluid
     {
-        type            mappedPatchBase;
+        type            mappedWall;
         inGroups        1 ( wall );
         nFaces          123;
         startFace       5967;
         sampleMode      nearestPatchFace;
         sampleRegion    fluid;
         samplePatch     fluid_to_steel;
-        physicalType    mappedPatchBase;
     }
 
     steel_to_food
     {
-        type            mappedPatchBase;
+        type            mappedWall;
         inGroups        1 ( wall );
         nFaces          23;
         startFace       6090;
         sampleMode      nearestPatchFace;
         sampleRegion    food;
         samplePatch     food_to_steel;
-        physicalType    mappedPatchBase;
     }
 
 )

@@ -26,10 +26,15 @@ boundaryField
         type            calculated;
         value           uniform 100000;
     }
-    cap_to_food
+    /* "wedge.*"
+        {
+            type            wedge;
+    	      physicalType	  wedge;
+        }*/
+ /*   cap_to_food
         {
         type          mappedPatchBase;
-        }
+        }*/
 }
 
 

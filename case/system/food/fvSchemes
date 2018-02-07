@@ -14,40 +14,36 @@ FoamFile
 } 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * // 
 
-ddtSchemes 
-{ 
-    default         steadyState; 
-} 
+ddtSchemes
+{
+    default Euler;
+}
 
-gradSchemes 
-{ 
-    default         Gauss linear; 
-} 
+gradSchemes
+{
+    default         Gauss linear;
+}
 
-divSchemes 
-{ 
-    default         none; 
-} 
+divSchemes
+{
+    default         none;
+}
 
-laplacianSchemes 
-{ 
-    default             none; 
-    laplacian(alpha,h)  Gauss linear uncorrected; 
-} 
+laplacianSchemes
+{
+    default             none;
+    laplacian(alpha,h)  Gauss linear corrected;
+}
 
-interpolationSchemes 
-{ 
-    default         linear; 
-} 
+interpolationSchemes
+{
+    default         linear;
+}
 
-snGradSchemes 
-{ 
-    default         uncorrected; 
-} 
+snGradSchemes
+{
+    default         corrected;
+}
 
-fluxRequired 
-{ 
-    default         no; 
-} 
 
 // ************************************************************************* //

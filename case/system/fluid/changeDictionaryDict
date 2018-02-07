@@ -23,29 +23,41 @@ boundary
         type            wedge;
     	  physicalType	  wedge;
     }
-    wall
+   /* wall
     {
         type            wall;
 	      physicalType	  wall;
-    }
+    }*/
     /*up
     {
         type            externalWallHeatFluxTemperature;
 	    physicalType	externalWallHeatFluxTemperature;
     }*/
-    "fluid_to_.*"
+    /*"fluid_to_.*"
     {
         type           mappedPatchBase;//mappedWall;
         physicalType   mappedPatchBase;//mappedWall;
-    }
+    }*/
 }
 T
 {
-    internalField   uniform 200;
+    internalField   uniform 300;
 
     boundaryField
     {
+        ".*"
+        {
+            type            zeroGradient;
+            value           uniform 300;
+        }
         "fluid_to_.*"
+        {
+            type            compressible::turbulentTemperatureCoupledBaffleMixed;
+            Tnbr            T;
+            kappaMethod     solidThermo;
+            value           uniform 300;
+        }
+       /* "fluid_to_.*"
             {
                 type            compressible::turbulentTemperatureCoupledBaffleMixed;
                 Tnbr            T;
@@ -54,13 +66,23 @@ T
                 //thicknessLayers ();
                 //kappaLayers     ();
                 value           uniform 200;
-            }
+            }*/
        "wedge.*"
             {
                 type            wedge;
           	    physicalType	  wedge;
             }
-    }
+       /*fluid_to_steel
+            {
+                type            compressible::turbulentTemperatureCoupledBaffleMixed;
+                Tnbr            T;
+                kappaMethod     solidThermo;
+                //kappaName       none;//kappa;
+                //thicknessLayers ();
+                //kappaLayers     ();
+                value           uniform 200;
+             }*/
+      }
 }
 
 p
