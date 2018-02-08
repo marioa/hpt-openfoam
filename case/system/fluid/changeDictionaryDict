@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-//# include "$FOAM_CASE/0/inputs"
+#include "$FOAM_CASE/0/inputs"
 
 boundary
 {
@@ -23,71 +23,36 @@ boundary
         type            wedge;
     	  physicalType	  wedge;
     }
-   /* wall
-    {
-        type            wall;
-	      physicalType	  wall;
-    }*/
-    /*up
-    {
-        type            externalWallHeatFluxTemperature;
-	    physicalType	externalWallHeatFluxTemperature;
-    }*/
-    /*"fluid_to_.*"
-    {
-        type           mappedPatchBase;//mappedWall;
-        physicalType   mappedPatchBase;//mappedWall;
-    }*/
 }
 T
 {
-    internalField   uniform 300;
+    internalField   uniform $Tini;
 
     boundaryField
     {
         ".*"
         {
             type            zeroGradient;
-            value           uniform 300;
+            value           uniform $Tini;
         }
         "fluid_to_.*"
         {
             type            compressible::turbulentTemperatureCoupledBaffleMixed;
             Tnbr            T;
             kappaMethod     solidThermo;
-            value           uniform 300;
+            value           uniform $Tini;
         }
-       /* "fluid_to_.*"
-            {
-                type            compressible::turbulentTemperatureCoupledBaffleMixed;
-                Tnbr            T;
-                kappaMethod     solidThermo;
-                //kappaName       none;//kappa;
-                //thicknessLayers ();
-                //kappaLayers     ();
-                value           uniform 200;
-            }*/
        "wedge.*"
             {
                 type            wedge;
           	    physicalType	  wedge;
             }
-       /*fluid_to_steel
-            {
-                type            compressible::turbulentTemperatureCoupledBaffleMixed;
-                Tnbr            T;
-                kappaMethod     solidThermo;
-                //kappaName       none;//kappa;
-                //thicknessLayers ();
-                //kappaLayers     ();
-                value           uniform 200;
-             }*/
       }
 }
 
 p
 {
-    internalField   uniform 1e5;
+    internalField   uniform $pini;
   
     boundaryField
     {

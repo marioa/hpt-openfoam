@@ -12,10 +12,10 @@ gmshToFoam ../mesh/hpt2.msh
 splitMeshRegions -cellZones -overwrite
 # Adjust polyMesh/boundary:  -enableFunctionEntries
 #changeDictionary
-changeDictionary -region cap
-changeDictionary -region fluid
-changeDictionary -region food
-changeDictionary -region steel
+changeDictionary -enableFunctionEntries  -region cap
+changeDictionary -enableFunctionEntries  -region fluid
+changeDictionary -enableFunctionEntries  -region food
+changeDictionary -enableFunctionEntries  -region steel
 
 # Let's set the initial conditions (high-pressure blast source)
 # First, let's load original p file.

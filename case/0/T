@@ -14,90 +14,18 @@ FoamFile
     object      T;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
+#include "inputs" 
 dimensions      [0 0 0 1 0 0 0];
 
-internalField   uniform 300;
+internalField   uniform $Tini;
 
 boundaryField
 {
     ".*"
     {
         type            calculated;
-        value           uniform 300;
+        value           uniform $Tini;
     }
 }
-
-// ************************************************************************* //
-
-/*#include "$FOAM_CASE/0/inputs"
-
-dimensions      [0 0 0 1 0 0 0];
-
-internalField   uniform $Tini;
-
-boundaryField
-{*/
-/*    up
-    { 
-                type            externalWallHeatFluxTemperature; 
-                kappa           solidThermo;       // fluidThermo, solidThermo or 
-                                               // lookup 
-                Ta              uniform 20;     // ambient temperature /[K] 
-                h               uniform 50;      // heat transfer coeff /[W/K/m2] 
-                thicknessLayers (0); 
-                kappaLayers     (0);//400ºC 
-                value           uniform 200;     // initial temperature / [K] 
-                kappaName       none; 
-                Qr              none;///Qr; 
-                relaxation      0.15; 
-           } */
-/*    {
-        type            externalWallHeatFluxTemperature;
-        kappa           solidThermo;
-//        q               uniform 1000;
-        Ta              uniform $Text;
-        h               uniform $h;
-        thicknessLayers (0.1 0.2 0.3 0.4);
-        kappaLayers     (1 2 3 4);
-        value           uniform $kcte;
-        kappaName       none;
-        Qr              none;
-        relaxation      1;
-    }*/
-/*    up
-    {
-        type            zeroGradient;//fixedGradient; // change it to heat transfer with the room!!
-        //gradient        uniform $gradroom;
-    }
-    ref
-    {
-        type            fixedValue;
-        value           uniform $Tref;
-    }
-    wedge0
-    {
-        type            wedge;
-    }
-    wedge1
-    {
-        type            wedge;
-    }
-    wall
-    {
-        type            zeroGradient;
-    }*/
-
-    /*    ".*"
-        {
-        type            zeroGradient;//calculated;//zeroGradient;
-        //value           uniform $Tini;
-        }
-        cap_to_food
-        {
-        type          mappedPatchBase;
-        }*/
-/*}
-*/
 
 // ************************************************************************* //
