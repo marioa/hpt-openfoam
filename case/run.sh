@@ -7,7 +7,7 @@ set -e
 # Make the mesh:
 #gmsh -3 -o main.msh mesh/main.geo
 # Convert the mesh to OpenFOAM format:
-gmshToFoam ../mesh/hpt2.msh
+#gmshToFoam ../mesh/hpt2.msh
 
 splitMeshRegions -cellZones -overwrite
 # Adjust polyMesh/boundary:  -enableFunctionEntries

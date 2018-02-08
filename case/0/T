@@ -21,10 +21,24 @@ internalField   uniform $Tini;
 
 boundaryField
 {
-    ".*"
+    steelwalls
     {
         type            calculated;
         value           uniform $Tini;
+    }
+    up
+    {
+        type            calculated;
+        value           uniform $Tini;
+    }
+    ref
+    {
+        type            calculated;
+        value           uniform $Tini;
+    }
+    "wedge.*"
+    {
+        type            wedge;
     }
 }
 
