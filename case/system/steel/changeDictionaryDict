@@ -56,10 +56,20 @@ T
             value           uniform $Tref;
         }
        up
-            {
-                type            fixedGradient; // change it to heat transfer with the room!!
-                gradient        uniform 4;//$gradroom;
-            }
+       {
+                type            externalWallHeatFluxTemperature; 
+                kappaMethod     solidThermo;       // fluidThermo, solidThermo or 
+                                               // lookup 
+                Ta              uniform $Text;     // ambient temperature /[K] 
+                h               uniform $href;      // heat transfer coeff /[W/K/m2] 
+                thicknessLayers (0); 
+                kappaLayers     (0);
+                value           uniform $Tref;     // initial temperature / [K] 
+                kappaName       kappa; 
+                Qr              none;///Qr; 
+                relaxation      0.15;  
+                mode            coefficient; // fixedHeatTransferCoeff
+       }
        ref
             {
                 type            fixedValue;
