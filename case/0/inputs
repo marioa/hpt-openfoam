@@ -22,5 +22,7 @@ href                  28;
 kcte              5.475000e-01;
 //gradroom          $href/$kcte;//($Text-T);
 pini              $pressure;
+Spfood            0.1778;
+Spfluid           0.1778;
 #inputMode merge
 // ************************************************************************* //
