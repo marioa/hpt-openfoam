@@ -14,27 +14,33 @@ FoamFile
     object      p;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+#include "inputs" 
 
 dimensions      [ 1 -1 -2 0 0 0 0 ];
 
-internalField   uniform 100000;
+internalField   uniform $pini;
 
 boundaryField
 {
-    ".*"
+    steelwalls
     {
         type            calculated;
-        value           uniform 100000;
+        value           uniform $pini;
     }
-    /* "wedge.*"
-        {
-            type            wedge;
-    	      physicalType	  wedge;
-        }*/
- /*   cap_to_food
-        {
-        type          mappedPatchBase;
-        }*/
+    up
+    {
+        type            calculated;
+        value           uniform $pini;
+    }
+    ref
+    {
+        type            calculated;
+        value           uniform $pini;
+    }
+    "wedge.*"
+    {
+        type            wedge;
+    }
 }
 
 

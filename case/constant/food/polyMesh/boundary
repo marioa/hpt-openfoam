@@ -22,6 +22,7 @@ FoamFile
     {
         type            wedge;
         physicalType    wedge;
+        inGroups        1 ( wedge );
         nFaces          5388;
         startFace       7969;
     }
@@ -30,6 +31,7 @@ FoamFile
     {
         type            wedge;
         physicalType    wedge;
+        inGroups        1 ( wedge );
         nFaces          5388;
         startFace       13357;
     }

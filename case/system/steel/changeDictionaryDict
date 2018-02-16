@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-//# include "$FOAM_CASE/0/inputs"
+#include "$FOAM_CASE/0/inputs"
 
 boundary
 {
@@ -23,11 +23,6 @@ boundary
         type            wedge;
     	  physicalType	  wedge;
     }
-    /*wall
-    {
-        type            wall;
-	      physicalType	  wall;
-    }*/
     up
     {
         type            patch;
@@ -41,49 +36,44 @@ boundary
         type            externalWallHeatFluxTemperature;
 	    physicalType	externalWallHeatFluxTemperature;
     }*/
-    /*"steel_to_.*"
-    {
-        type           mappedPatchBase;//mappedWall;
-        physicalType   mappedPatchBase;//mappedWall;
-    }*/
 }
 T
 {
-    internalField   uniform 300;
+    internalField   uniform $Tref;
 
     boundaryField
     {
-        /*steel_to_fluid
-            {
-                type            compressible::turbulentTemperatureCoupledBaffleMixed;
-                Tnbr            T;
-                kappaMethod     solidThermo;
-                //kappaName       none;//kappa;
-                //thicknessLayers ();
-                //kappaLayers     ();
-                value           uniform 200;
-            }*/
        ".*"
         {
             type            zeroGradient;
-            value           uniform 300;
+            value           uniform $Tref;
         }
         "steel_to_.*"
         {
             type            compressible::turbulentTemperatureCoupledBaffleMixed;
             Tnbr            T;
             kappaMethod     solidThermo;
-            value           uniform 300;
+            value           uniform $Tref;
         }
        up
-            {
-                type            fixedGradient; // change it to heat transfer with the room!!
-                gradient        uniform 4;//$gradroom;
-            }
+       {
+                type            externalWallHeatFluxTemperature; 
+                kappaMethod     solidThermo;       // fluidThermo, solidThermo or 
+                                               // lookup 
+                Ta              uniform $Text;     // ambient temperature /[K] 
+                h               uniform $href;      // heat transfer coeff /[W/K/m2] 
+                thicknessLayers (0); 
+                kappaLayers     (0);
+                value           uniform $Tref;     // initial temperature / [K] 
+                kappaName       kappa; 
+                Qr              none;///Qr; 
+                relaxation      0.15;  
+                mode            coefficient; // fixedHeatTransferCoeff
+       }
        ref
             {
                 type            fixedValue;
-                value           uniform 300;//$Tref;
+                value           uniform $Tref;
             }
        "wedge.*"
             {
@@ -100,7 +90,7 @@ T
 
 p
 {
-    internalField   uniform 1e5;
+    internalField   uniform $pini;
   
     boundaryField
     {
