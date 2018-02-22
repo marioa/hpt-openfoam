@@ -1,0 +1,51 @@
+#!/bin/bash --login
+
+# PBS job options (name, compute nodes, job time)
+#PBS -N hptsimulation
+#PBS -l select=1:ncpus=1
+
+# Replace [budget code] below with your project code (e.g. t01)
+#PBS -A dc010-miriam
+
+# Change to the directory that the job was submitted from
+cd $PBS_O_WORKDIR
+
+# Load any required modules
+module load intel-compilers-16
+module add openfoam
+source $OPENFOAM_CURPATH/etc/bashrc
+
+
+# Set the number of threads to 1 to ensure serial
+export OMP_NUM_THREADS=1
+
+# Run the serial executable
+# Quit script if any step has error:
+set -e
+# Source tutorial run functions
+#. $WM_PROJECT_DIR/bin/tools/RunFunctions
+# Make the mesh:
+#gmsh -3 -o main.msh mesh/main.geo
+# Convert the mesh to OpenFOAM format:
+#gmshToFoam ../mesh/hpt2.msh
+
+START=$(date +%s)
+
+splitMeshRegions -cellZones -overwrite
+# Adjust polyMesh/boundary:  -enableFunctionEntries
+#changeDictionary
+changeDictionary -enableFunctionEntries  -region cap
+changeDictionary -enableFunctionEntries  -region fluid
+changeDictionary -enableFunctionEntries  -region food
+changeDictionary -enableFunctionEntries  -region steel
+
+# Let's set the initial conditions (high-pressure blast source)
+# First, let's load original p file.
+##cp case/0/p.original case/0/p
+##setFields -case case
+# Finally, run the simulation:
+chtMultiRegionFoam #-case case
+
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+echo "It took $DIFF seconds" > comptime

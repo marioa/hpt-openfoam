@@ -20,7 +20,7 @@ volumetricHeatSource
     type            scalarSemiImplicitSource;
     active          true;
     timeStart       0;
-    duration        10;
+    duration        20;
     //selectionMode   all;  //cellSet // points //all  (other options)
 
     

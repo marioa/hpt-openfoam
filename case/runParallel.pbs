@@ -1,0 +1,56 @@
+#!/bin/bash --login
+
+# PBS job options (name, compute nodes, job time)
+#PBS -N hptsimulationParallel
+# Select 4 full nodes
+#PBS -l select=4:ncpus=72
+# Parallel jobs should always specify exclusive node access
+#PBS -l place=excl
+
+# Replace [budget code] below with your project code (e.g. t01)
+#PBS -A dc010-miriam
+
+# Change to the directory that the job was submitted from
+cd $PBS_O_WORKDIR
+
+# Load any required modules
+module load mpt
+module load intel-compilers-17
+module add openfoam
+source $OPENFOAM_CURPATH/etc/bashrc 
+
+
+# Set the number of threads to 18
+#   There are 18 OpenMP threads per MPI process
+export OMP_NUM_THREADS=18
+
+# Run the serial executable
+# Quit script if any step has error:
+set -e
+# Source tutorial run functions
+#. $WM_PROJECT_DIR/bin/tools/RunFunctions
+# Make the mesh:
+#gmsh -3 -o main.msh mesh/main.geo
+# Convert the mesh to OpenFOAM format:
+#gmshToFoam ../mesh/hpt2.msh
+
+START=$(date +%s)
+
+splitMeshRegions -cellZones -overwrite
+# Adjust polyMesh/boundary:  -enableFunctionEntries
+#changeDictionary
+changeDictionary -enableFunctionEntries  -region cap
+changeDictionary -enableFunctionEntries  -region fluid
+changeDictionary -enableFunctionEntries  -region food
+changeDictionary -enableFunctionEntries  -region steel
+
+# Let's set the initial conditions (high-pressure blast source)
+# First, let's load original p file.
+##cp case/0/p.original case/0/p
+##setFields -case case
+# Finally, run the simulation:
+mpirun -np 4 chtMultiRegionFoam -parallel > log &
+
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+echo "It took $DIFF seconds" > comptime_parallel4
