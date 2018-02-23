@@ -1,0 +1,78 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+#include "$FOAM_CASE/0/inputs"
+volumetricHeatSource
+{
+    type            scalarSemiImplicitSource;
+    active          true;
+    timeStart       0;
+    duration        112.5;
+    //selectionMode   all;  //cellSet // points //all  (other options)
+
+    
+    scalarSemiImplicitSourceCoeffs
+    {
+        selectionMode   all;
+        volumeMode      specific;//absolute;
+        injectionRateSuSp
+        {
+            h (0 $Spfluid );   // S(T)=S_u+S_p*T  ===>  S_u=g    S_p=0   
+        }              // g= specific volumetric generation (W/m3) , rho=density, cp= specific heat (S.I.)  
+    }                  // g= absolute volumetric generation (W) ===> in the example 3W are considered
+}
+
+volumetricHeatSource
+{
+    type            scalarSemiImplicitSource;
+    active          true;
+    timeStart       112.5;
+    duration        112.5;
+    //selectionMode   all;  //cellSet // points //all  (other options)
+
+    
+    scalarSemiImplicitSourceCoeffs
+    {
+        selectionMode   all;
+        volumeMode      specific;//absolute;
+        injectionRateSuSp
+        {
+            h (0 0.5);//$Spfluid );   // S(T)=S_u+S_p*T  ===>  S_u=g    S_p=0   
+        }              // g= specific volumetric generation (W/m3) , rho=density, cp= specific heat (S.I.)  
+    }                  // g= absolute volumetric generation (W) ===> in the example 3W are considered
+}
+
+volumetricHeatSource
+{
+    type            scalarSemiImplicitSource;
+    active          true;
+    timeStart       225;
+    duration        112.5;
+    //selectionMode   all;  //cellSet // points //all  (other options)
+
+    
+    scalarSemiImplicitSourceCoeffs
+    {
+        selectionMode   all;
+        volumeMode      specific;//absolute;
+        injectionRateSuSp
+        {
+            h (0 0.5);//$Spfluid );   // S(T)=S_u+S_p*T  ===>  S_u=g    S_p=0   
+        }              // g= specific volumetric generation (W/m3) , rho=density, cp= specific heat (S.I.)  
+    }                  // g= absolute volumetric generation (W) ===> in the example 3W are considered
+}
+
+// ************************************************************************* //

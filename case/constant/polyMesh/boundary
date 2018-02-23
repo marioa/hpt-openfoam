@@ -9,39 +9,49 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
-    location    "0";
-    object      p;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-#include "inputs" 
 
-dimensions      [ 1 -1 -2 0 0 0 0 ];
-
-internalField   uniform $pini;
-
-boundaryField
-{
+5
+(
+    wedge0
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          9695;
+        startFace       14444;
+    }
     steelwalls
     {
-        type            calculated;
-        value           uniform $pini;
+        type            patch;
+        physicalType    patch;
+        nFaces          19;
+        startFace       24139;
     }
     up
     {
-        type            calculated;
-        value           uniform $pini;
+        type            patch;
+        physicalType    patch;
+        nFaces          2;
+        startFace       24158;
+    }
+    wedge1
+    {
+        type            wedge;
+        physicalType    wedge;
+        nFaces          9695;
+        startFace       24160;
     }
     ref
     {
-        type            calculated;
-        value           uniform $pini;
+        type            patch;
+        physicalType    patch;
+        nFaces          25;
+        startFace       33855;
     }
-    "wedge.*"
-    {
-        type            wedge;
-    }
-}
-
+)
 
 // ************************************************************************* //
