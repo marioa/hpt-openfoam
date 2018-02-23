@@ -1,0 +1,6 @@
+***********************************OpenFOAM v1706************************************
+* The modules required for OpenFOAM should now be loaded.                           *
+* You now need to source the etc/bashrc file to finish the setup of OpenFOAM        *
+* You can do this using the following command:                                      *
+*        source $OPENFOAM_CURPATH/etc/bashrc                                          *
+*************************************************************************************
