@@ -23,3 +23,4 @@ changeDictionary -region steel
 ##setFields -case case
 # Finally, run the simulation:
 chtMultiRegionFoam #-case case
+
